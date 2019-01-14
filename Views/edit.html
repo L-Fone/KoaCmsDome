@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>编辑学员</h2>
+    <form action="/doedit" method="post">
+        <!-- hidden 隐藏块 -->
+        <input type="hidden" name="_id" value="{{@list._id}}"/>
+        用户名：<input type="text" name="name" value="{{list.name}}"/>
+        <br/>
+        <br/>
+        年&emsp;龄：<input type="text" name="age" value="{{list.age}}"/>
+        <br/>
+        <br/>
+        性&emsp;别：<input type="text" name="sex" value="{{list.sex}}"/>
+        <br/>
+        <br/>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
