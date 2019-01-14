@@ -6,14 +6,14 @@ var Koa = require('koa'),
     bp = require('koa-bodyparser'),//获取post数据
     path = require('path');
 
-
+const dirpath = __dirname.replace('Test','views');
 
 var app = new Koa(),
     router = new Router();
 
 render(app,
     {
-        root: path.join(__dirname + '/Views'),//模板路径
+        root: path.join(dirpath),//模板路径
         extname:'.html',//文件后缀名
         debug:process.env.NODE_EVN !== 'production'//是否开启调试模式
     });
@@ -108,8 +108,6 @@ router.get('/delete', async (ctx)=>{
         ctx.redirect('/');
     }
 });
-
-
 
 
 
