@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{@types/ejs, @types/ejs-locals, @types/koa, @types/koa-route, @types/koa-router, @types/koa-session, @types/koa-static, @types/koa-static-cache, @types/koa-static-server, @types/koa-views, @types/mongodb, @types/mongodb-memory-server, @types/mongodb-uri, @types/node, @types/node-resque}" />
+    <includedPredefinedLibrary name="HTTP Response Handler" />
+    <includedPredefinedLibrary name="Node.js Core" />
+  </component>
+</project>

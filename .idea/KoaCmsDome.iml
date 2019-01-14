@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@types/ejs" level="application" />
+    <orderEntry type="library" name="@types/ejs-locals" level="application" />
+    <orderEntry type="library" name="@types/koa" level="application" />
+    <orderEntry type="library" name="@types/koa-route" level="application" />
+    <orderEntry type="library" name="@types/koa-router" level="application" />
+    <orderEntry type="library" name="@types/koa-session" level="application" />
+    <orderEntry type="library" name="@types/koa-static" level="application" />
+    <orderEntry type="library" name="@types/koa-static-cache" level="application" />
+    <orderEntry type="library" name="@types/koa-static-server" level="application" />
+    <orderEntry type="library" name="@types/koa-views" level="application" />
+    <orderEntry type="library" name="@types/node" level="application" />
+    <orderEntry type="library" name="@types/mongodb" level="application" />
+    <orderEntry type="library" name="@types/mongodb-memory-server" level="application" />
+    <orderEntry type="library" name="@types/mongodb-uri" level="application" />
+    <orderEntry type="library" name="@types/node-resque" level="application" />
+  </component>
+</module>
