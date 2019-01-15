@@ -8,10 +8,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="@types/npm" level="application" />
-    <orderEntry type="library" name="@types/node-config-manager" level="application" />
-    <orderEntry type="library" name="@types/vue-color" level="application" />
-    <orderEntry type="library" name="@types/node-static" level="application" />
     <orderEntry type="library" name="@types/ejs" level="application" />
     <orderEntry type="library" name="@types/ejs-locals" level="application" />
     <orderEntry type="library" name="@types/koa" level="application" />
@@ -24,11 +20,7 @@
     <orderEntry type="library" name="@types/koa-views" level="application" />
     <orderEntry type="library" name="@types/modesl" level="application" />
     <orderEntry type="library" name="@types/mongo-sanitize" level="application" />
-    <orderEntry type="library" name="@types/mongodb" level="application" />
-    <orderEntry type="library" name="@types/mongodb-memory-server" level="application" />
-    <orderEntry type="library" name="@types/mongodb-uri" level="application" />
     <orderEntry type="library" name="@types/node-resque" level="application" />
     <orderEntry type="library" name="@types/nodeunit" level="application" />
-    <orderEntry type="library" name="@types/noisejs" level="application" />
   </component>
 </module>

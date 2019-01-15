@@ -4,7 +4,7 @@ const router = new Router();
 
 router.get('/',async (ctx)=>{
     // ctx.body = "用户首页";
-    await ctx.render('admin/user/index');
+    await ctx.render('admin/user/list');
 });
 
 router.get('/add',async (ctx)=>{
@@ -22,4 +22,4 @@ router.get('/delete',async (ctx)=>{
 });
 
 //暴露出模块
-module.exports = router;
+module.exports = router.routes();

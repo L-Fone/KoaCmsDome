@@ -1,4 +1,4 @@
-
+//api接口路由
 
 //引入
 const Router = require('koa-router');
@@ -19,4 +19,4 @@ router.get('/focus',async (ctx)=>{
 
 
 //暴露子路由
-module.exports = router;
+module.exports = router.routes();

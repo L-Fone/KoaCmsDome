@@ -1,0 +1,97 @@
+//登录界面
+
+const Router = require('koa-router');
+const router = new Router();
+
+//引入验证码
+const capthcha = require('svg-captcha');
+
+//引入自定义模块
+const md5 = require('../../model/tools');
+const db = require('../../model/db');
+
+
+router.get('/',async (ctx)=>{
+    //ctx.body = "用户登录";
+    await ctx.render('admin/login');
+});
+
+//接收登录传来的值
+router.post('/doLogin',async (ctx)=>{
+
+    //利用bodyParser中间件接收登录post过来的数据
+    console.log(ctx.request.body);
+    //做登录
+    let username = ctx.request.body.username;
+    let password = ctx.request.body.password;
+    let code = ctx.request.body.code;//验证码
+
+    //验证码：https://www.npmjs.com/package/svg-captcha
+    //1.验证密码是否合法
+    //code.toLocaleLowerCase() 转换成小写
+    if(code.toLocaleLowerCase() === ctx.session.code.toLocaleLowerCase())
+    {
+        let pass = md5.MD5(password);
+        console.log("加密MD5 => "+pass);
+
+        //2.去数据库匹配
+        //md5.MD5();
+        let result = await db.find('admin',{"username":username, "password":md5.MD5(password)});
+
+        //3.成功后，把用户写入session
+        if(result.length > 0)
+        {
+            console.log('成功');
+            ctx.session.userinfo = result[0];
+            await ctx.redirect(ctx.state.__HOST__ + '/admin');
+        }
+        else
+        {
+            //console.log('失败');
+            //await ctx.redirect('/admin/login');
+            await ctx.render('admin/error',{
+                message:'用户名或者密码错误',
+                redirect:ctx.state.__HOST__ + '/admin/login'
+            });
+        }
+    }
+    else
+    {
+        // console.log('验证码失败');
+        // await ctx.redirect('/admin/login');
+        await ctx.render('admin/error',{
+            message:'验证码失败',
+            redirect:ctx.state.__HOST__ + '/admin/login'
+        });
+    }
+
+});
+
+//验证码：https://www.npmjs.com/package/svg-captcha
+//生成验证码路由
+router.get('/code',async (ctx)=>{
+    //ctx.body = '验证码';
+    //生成验证码内容 生成方式1
+    let svg = capthcha.create
+    ({
+        //参数
+        size: 4, //验证码长度
+        fontSize:50,//字体大小
+        width:120,//宽度
+        height:34,//高度
+        background:"#cc9966"//背景颜色
+    });
+    //加法验证码 生成方式2
+    //let svg = capthcha.createMathExpr();
+    console.log(svg.text);//后端文字
+    //保存生成的验证码
+    ctx.session.code = svg.text;
+    ctx.response.type = 'image/svg+xml'; //固定格式响应头
+    ctx.body =svg.data;//前端图片
+});
+
+
+
+
+//暴露出模块
+module.exports = router.routes();

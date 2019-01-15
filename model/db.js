@@ -55,16 +55,24 @@ class DB
     {
         return new Promise((resolve, reject)=>{
             this.connect().then((db)=>{
-                var result = db.collection(collectionName).find(json);
-                result.toArray((err, doc)=>
-                {
-                    if(err)
+                db.collection(collectionName).find(json,(error,result)=>{
+                    if(error)
                     {
-                        reject(err);
+                        reject(error);
                     }
                     else
                     {
-                        resolve(doc);
+                        result.toArray((err, doc)=>
+                        {
+                            if(err)
+                            {
+                                reject(err);
+                            }
+                            else
+                            {
+                                resolve(doc);
+                            }
+                        });
                     }
                 });
             });

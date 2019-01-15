@@ -24,4 +24,4 @@ router.get('/delete',async (ctx)=>{
 
 
 //暴露子路由
-module.exports = router;
+module.exports = router.routes();

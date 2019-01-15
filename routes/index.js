@@ -1,4 +1,4 @@
-//前端首页
+//前端首页路由
 
 
 //引入
@@ -22,4 +22,4 @@ router.get('about',async (ctx)=>{
 
 
 //暴露子路由
-module.exports = router;
+module.exports = router.routes();

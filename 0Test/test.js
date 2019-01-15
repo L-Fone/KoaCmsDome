@@ -6,7 +6,7 @@ var Koa = require('koa'),
     bp = require('koa-bodyparser'),//获取post数据
     path = require('path');
 
-const dirpath = __dirname.replace('Test','views');
+const dirpath = __dirname.replace('0Test','views');
 
 var app = new Koa(),
     router = new Router();
