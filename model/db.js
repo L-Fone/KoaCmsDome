@@ -98,7 +98,6 @@ class DB
                     }
                     else
                     {
-                        console.log(doc);
                         resolve(doc);
                     }
                 });
@@ -153,6 +152,24 @@ class DB
         return new Promise((resolve, reject)=>{
             this.connect().then((db)=>{
                 db.collection(collectionName).removeOne(json, (err,result)=>{
+                    if(err)
+                    {
+                        reject(err);
+                    }
+                    else
+                    {
+                        resolve(result);
+                    }
+                });
+            });
+        });
+    }
+
+    count(collectionName, json)
+    {
+        return new Promise((resolve, reject)=>{
+            this.connect().then((db)=>{
+                db.collection(collectionName).countDocuments(json, (err,result)=>{
                     if(err)
                     {
                         reject(err);

@@ -10,6 +10,7 @@ const Koa = require('koa')//koa
     , bodyParser = require('koa-bodyparser')//接受post数据
     , sd = require('silly-datetime')//管道格式化时间
     , jsonp = require('koa-jsonp')//格式化获取json数据
+    , multer = require('koa-multer')//文件上传模块
     ;
 
 //引入子路由模块

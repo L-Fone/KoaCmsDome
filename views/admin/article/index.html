@@ -140,8 +140,8 @@
 
 								</tbody>
 							</table>
-
-							<div id="page" class="pagination"></div>
+							<!-- jqPaginator插件分页  -->
+							<div id="page" class="pagination" ></div>
 						</div>
 
 					</div>
@@ -158,24 +158,23 @@
 
 	{{include 'admin/public/footer.html'}}
 
-	<!--注意放在jq下面-->
-    <script src="{{__HOST__}}/admin/jqPaginator.js"></script>
-
+	<!--注意放在jq下面  jqPaginator插件-->
+	<script src="{{__HOST__}}/admin/jqPaginator.js"></script>
 
 	<script>
 		$('#page').jqPaginator({
 			totalPages: {{totalPages}},
-			visiblePages: 8,
-			currentPage: {{page}},
+			visiblePages: {{visiblePage}},
+			currentPage: {{curPage}},
 			onPageChange: function (num, type) {
-				console.log(num, type);
+				//console.log(num, type);
 //
 				if(type=='change'){
+				    //传递参数
 					location.href="{{__HOST__}}/admin/article?page="+num;
 				}
 			}
 		});
-
 	</script>
 
 
