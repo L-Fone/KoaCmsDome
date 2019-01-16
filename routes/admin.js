@@ -6,11 +6,12 @@ const router = new Router();
 const url = require('url');
 
 //引入子路由
-const user = require('./admin/user');
-const focus = require('./admin/focus');
-const newscate = require('./admin/newscate');
-const login = require('./admin/login');
-
+const user = require('./admin/user'),
+      focus = require('./admin/focus'),
+      newscate = require('./admin/newscate'),
+      login = require('./admin/login'),
+      manager = require('./admin/manager'),
+      index = require('./admin/index');
 
 /* -----------------------------------------------------*/
 
@@ -21,6 +22,24 @@ router.use(async (ctx, next)=>{
 
     //过滤URL
     let pathName = url.parse(ctx.url).pathname;
+
+    if(pathName.endsWith('/'))
+    {
+        pathName = pathName.substring(0,pathName.length-1);
+    }
+    if(pathName.startsWith('/'))
+    {
+        pathName = pathName.substring(1);
+    }
+
+    let splitUrl = pathName.split('/');
+
+    //配置全局对象
+    ctx.state.G =
+        {
+            url:splitUrl,
+            userinfo:ctx.session.userinfo,
+        };
 
 
     //登录权限判断
@@ -34,7 +53,7 @@ router.use(async (ctx, next)=>{
     else
     {
         //如果当前页面是登录页面
-        if(pathName === '/admin/login' || pathName === '/admin/login/doLogin' || pathName === '/admin/login/code')
+        if(pathName === 'admin/login' || pathName === 'admin/login/doLogin' || pathName === 'admin/login/code')
         {
             //向下匹配
             await next();
@@ -53,6 +72,8 @@ router.use('/user',user);
 router.use('/focus',focus);
 router.use('/newscate',newscate);
 router.use('/login',login);
+router.use('/manager', manager);
+router.use(index);
 
 
 /* -----------------------------------------------------*/

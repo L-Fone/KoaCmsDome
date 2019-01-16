@@ -8,8 +8,9 @@ const Koa = require('koa')//koa
     , statics = require('koa-static')//静态web服务[加载css等]
     , session = require('koa-session')//session
     , bodyParser = require('koa-bodyparser')//接受post数据
+    , sd = require('silly-datetime')//管道格式化时间
+    , jsonp = require('koa-jsonp')//格式化获取json数据
     ;
-
 
 //引入子路由模块
 const admin = require('./routes/admin');//后台
@@ -25,7 +26,12 @@ var app = new Koa(),
 render(app,{
     root:path.join(__dirname, 'views'),         //模板路径
     extname:'.html',                            //模板文件类型
-    debug:process.env.NODE_EVN !== 'production' //是否调试模式
+    debug:process.env.NODE_EVN !== 'production', //是否调试模式
+
+    //配置 silly-datetime
+    dateFormat:dateFormat = function (value) {    //管道格式化时间
+        return sd.format(value, 'YYYY年MM月DD日 HH:mm:ss');
+    }
 });
 
 //配置静态资源中间件
@@ -36,7 +42,7 @@ app.keys = ['some secret hurr'];//默认一定一定要加
 const CONFIG =
     {
       key:'koa:sess',
-      maxAge:86400,
+      maxAge:86400000,//单位毫秒
       overwrite:true,
       httpOnly:true,
       signed:true,
@@ -47,6 +53,9 @@ app.use(session(CONFIG, app));
 
 //配置bodyParser用于读取post过来的数据
 app.use(bodyParser());
+
+//配置jsonp中间件
+app.use(jsonp());
 
 
 /* ----------------配置子路由---------------------------- */

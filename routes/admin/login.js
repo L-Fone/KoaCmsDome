@@ -16,11 +16,18 @@ router.get('/',async (ctx)=>{
     await ctx.render('admin/login');
 });
 
+router.get('/loginOut',async (ctx)=>{
+    //ctx.body = "退出登录";
+    console.log('推出登录');
+    ctx.session.userinfo = null;
+    await ctx.redirect(ctx.state.__HOST__ + '/admin/login');
+});
+
 //接收登录传来的值
 router.post('/doLogin',async (ctx)=>{
 
     //利用bodyParser中间件接收登录post过来的数据
-    console.log(ctx.request.body);
+    //console.log(ctx.request.body);
     //做登录
     let username = ctx.request.body.username;
     let password = ctx.request.body.password;
@@ -31,8 +38,10 @@ router.post('/doLogin',async (ctx)=>{
     //code.toLocaleLowerCase() 转换成小写
     if(code.toLocaleLowerCase() === ctx.session.code.toLocaleLowerCase())
     {
+        //必须首先验证用户名和密码是否合法，防止sql注入
+
         let pass = md5.MD5(password);
-        console.log("加密MD5 => "+pass);
+        //console.log("加密MD5 => "+pass);
 
         //2.去数据库匹配
         //md5.MD5();
@@ -41,8 +50,13 @@ router.post('/doLogin',async (ctx)=>{
         //3.成功后，把用户写入session
         if(result.length > 0)
         {
-            console.log('成功');
+            //console.log('成功');
             ctx.session.userinfo = result[0];
+            //更新用户表，改变用户登录时间
+            await db.update('admin',{"_id":db.GetObjectID(result[0]._id)},{
+                last_time:new Date()
+            });
+
             await ctx.redirect(ctx.state.__HOST__ + '/admin');
         }
         else
@@ -72,7 +86,17 @@ router.post('/doLogin',async (ctx)=>{
 router.get('/code',async (ctx)=>{
     //ctx.body = '验证码';
     //生成验证码内容 生成方式1
-    let svg = capthcha.create
+    // let svg = capthcha.create
+    // ({
+    //     //参数
+    //     size: 4, //验证码长度
+    //     fontSize:50,//字体大小
+    //     width:120,//宽度
+    //     height:34,//高度
+    //     background:"#cc9966"//背景颜色
+    // });
+    //加法验证码 生成方式2
+    let svg = capthcha.createMathExpr
     ({
         //参数
         size: 4, //验证码长度
@@ -81,15 +105,12 @@ router.get('/code',async (ctx)=>{
         height:34,//高度
         background:"#cc9966"//背景颜色
     });
-    //加法验证码 生成方式2
-    //let svg = capthcha.createMathExpr();
-    console.log(svg.text);//后端文字
+    //console.log(svg.text);//后端文字
     //保存生成的验证码
     ctx.session.code = svg.text;
     ctx.response.type = 'image/svg+xml'; //固定格式响应头
     ctx.body =svg.data;//前端图片
 });
-
 
 
 
