@@ -13,7 +13,7 @@ router.get('/',async (ctx)=>{
     await ctx.render('admin/index');
 });
 
-//改变状态方法
+//子路由公共改变状态方法
 router.get('/changeStatus',async (ctx)=>{
     // ctx.body = "改变状态";
     //console.log(ctx.query);
@@ -59,6 +59,34 @@ router.get('/changeStatus',async (ctx)=>{
 
 
 });
+
+
+//子路由公共删除数据
+router.get('/delete',async (ctx)=>{
+
+    let collection = ctx.query.collection;
+    let id = ctx.query.id;
+
+    var result = await db.remove(collection,{"_id":db.GetObjectID(id)});
+
+    if(result.result.ok === 1)
+    {
+        //删除成功
+        //返回之前打开的页面
+        await ctx.redirect(ctx.state.G.prevPage);
+    }
+    else
+    {
+        await ctx.render('admin/error',{
+            wait:3,
+            message:'错误:删除失败了....',
+            //返回之前打开的页面
+            redirect:ctx.state.G.prevPage,
+        });
+    }
+});
+
+
 
 
 //暴露出模块

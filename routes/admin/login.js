@@ -9,6 +9,7 @@ const capthcha = require('svg-captcha');
 //引入自定义模块
 const md5 = require('../../model/tools');
 const db = require('../../model/db');
+const cfg = require('../../model/config');
 
 
 router.get('/',async (ctx)=>{
@@ -18,7 +19,7 @@ router.get('/',async (ctx)=>{
 
 router.get('/loginOut',async (ctx)=>{
     //ctx.body = "退出登录";
-    console.log('推出登录');
+    //console.log('推出登录');
     ctx.session.userinfo = null;
     await ctx.redirect(ctx.state.__HOST__ + '/admin/login');
 });
@@ -45,7 +46,7 @@ router.post('/doLogin',async (ctx)=>{
 
         //2.去数据库匹配
         //md5.MD5();
-        let result = await db.find('admin',{"username":username, "password":md5.MD5(password)});
+        let result = await db.find(cfg.admin,{"username":username, "password":md5.MD5(password)});
 
         //3.成功后，把用户写入session
         if(result.length > 0)
@@ -53,9 +54,11 @@ router.post('/doLogin',async (ctx)=>{
             //console.log('成功');
             ctx.session.userinfo = result[0];
             //更新用户表，改变用户登录时间
-            await db.update('admin',{"_id":db.GetObjectID(result[0]._id)},{
-                last_time:new Date()
-            });
+            await db.update(cfg.admin,{"_id":db.GetObjectID(result[0]._id)},
+                {
+                    last_time : new Date()
+                }
+            );
 
             await ctx.redirect(ctx.state.__HOST__ + '/admin');
         }
@@ -64,6 +67,7 @@ router.post('/doLogin',async (ctx)=>{
             //console.log('失败');
             //await ctx.redirect('/admin/login');
             await ctx.render('admin/error',{
+                wait:3,
                 message:'用户名或者密码错误',
                 redirect:ctx.state.__HOST__ + '/admin/login'
             });
@@ -74,6 +78,7 @@ router.post('/doLogin',async (ctx)=>{
         // console.log('验证码失败');
         // await ctx.redirect('/admin/login');
         await ctx.render('admin/error',{
+            wait:3,
             message:'验证码失败',
             redirect:ctx.state.__HOST__ + '/admin/login'
         });

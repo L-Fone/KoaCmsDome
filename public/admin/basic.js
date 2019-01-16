@@ -1,6 +1,10 @@
 
 //用户管理界面成员列表状态按钮事件
 
+$(function () {
+    //注册jQ事件
+    app.confirmDelete();
+});
 
 //前台jq声明
 var app =
@@ -25,5 +29,15 @@ var app =
                     }
                 }
             )
+        },
+
+        //确定删除jQ语法
+        confirmDelete()
+        {
+            $('.delete').click(function () {
+                let flag = confirm('你确定要删除吗？');
+                return flag;
+            })
         }
+
     };

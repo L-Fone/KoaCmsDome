@@ -50,29 +50,56 @@ class DB
         });
     }
 
+    /*
+    *  db.find('user',{}) //返回所有数据
+    *  db.find('user',{},{'title':1})//返回所有数据，只返回指定的这一列
+    *  db.find('user',{},{'title':1},{ page:n, pageSize:m }) //返回第n页开始的m个数据，并且是指定列
+    *
+    *  js中实参和形参可以不一样
+    *  arguments对象接收实参传过来的数据
+    *
+    * */
+
     //查找数据传入：表名，查找条件
-    find(collectionName, json)
+    find(collectionName, json1, json2, json3)
     {
+        let attr = {};
+        let slipNum = 0;
+        let pageSize = 0;
+        if(arguments.length === 2)
+        {
+        }
+        else if(arguments.length === 3)
+        {
+            attr = json2;
+        }
+        else if(arguments.length === 4)
+        {
+            attr = json2;
+            let starPage = json3.page || 1;
+            pageSize = json3.pageSize || 20;
+            slipNum = (starPage-1)*pageSize;
+        }
+        else
+        {
+            console.log('传入参数错误');
+        }
+
         return new Promise((resolve, reject)=>{
             this.connect().then((db)=>{
-                db.collection(collectionName).find(json,(error,result)=>{
-                    if(error)
+                //db.collection(collectionName).find(json,(error,result)=>{
+                let result = db.collection(collectionName).find(json1,{files:attr}).skip(slipNum).limit(pageSize);
+
+                result.toArray((err, doc)=>
+                {
+                    if(err)
                     {
-                        reject(error);
+                        reject(err);
                     }
                     else
                     {
-                        result.toArray((err, doc)=>
-                        {
-                            if(err)
-                            {
-                                reject(err);
-                            }
-                            else
-                            {
-                                resolve(doc);
-                            }
-                        });
+                        console.log(doc);
+                        resolve(doc);
                     }
                 });
             });

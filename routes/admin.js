@@ -8,10 +8,11 @@ const url = require('url');
 //引入子路由
 const user = require('./admin/user'),
       focus = require('./admin/focus'),
-      newscate = require('./admin/newscate'),
       login = require('./admin/login'),
       manager = require('./admin/manager'),
-      index = require('./admin/index');
+      index = require('./admin/index'),
+      articlecate = require('./admin/articlecate'),
+      article = require('./admin/article');
 
 /* -----------------------------------------------------*/
 
@@ -39,6 +40,7 @@ router.use(async (ctx, next)=>{
         {
             url:splitUrl,
             userinfo:ctx.session.userinfo,
+            prevPage:ctx.request.header['referer'],//记录上一个打开的页面
         };
 
 
@@ -70,9 +72,10 @@ router.use(async (ctx, next)=>{
 //配置子路由 [必须放在全局中间件之后]
 router.use('/user',user);
 router.use('/focus',focus);
-router.use('/newscate',newscate);
 router.use('/login',login);
 router.use('/manager', manager);
+router.use('/articlecate', articlecate);//分类管理
+router.use('/article', article);//内容管理
 router.use(index);
 
 
