@@ -60,8 +60,8 @@ router.get('/add',async (ctx)=>{
 //upload对应中间件 pic对应视图的name
 router.post('/doAdd', upload.single('pic') , async (ctx)=>{
     ctx.body={
-        //返回的文件名
-        filename:ctx.req.file.filename,
+        //返回的文件名 判断ctx.req.file是否存在
+        filename:ctx.req.file ? ctx.req.file.filename : '',
         body:ctx.req.body,
     }
 });
@@ -73,8 +73,9 @@ router.get('/edit',async (ctx)=>{
     await ctx.render('admin/article/edit');
 });
 
-router.get('/delete',async (ctx)=>{
-    ctx.body = "删除文章内容";
+//测试路由
+router.get('/ueditor',async (ctx)=>{
+    ctx.render('admin/article/ueditor');
 });
 
 

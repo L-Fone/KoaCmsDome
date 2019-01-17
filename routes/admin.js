@@ -14,6 +14,9 @@ const user = require('./admin/user'),
       articlecate = require('./admin/articlecate'),
       article = require('./admin/article');
 
+//文本编辑器
+const ueditor = require('koa2-ueditor');
+
 /* -----------------------------------------------------*/
 
 //配置中间件 获取URL的地址
@@ -67,6 +70,17 @@ router.use(async (ctx, next)=>{
         }
     }
 });
+
+
+//配置文本编辑器
+//'public'为储存目录 要修改ueditor.config
+router.all('/editor/controller',ueditor(['public',{
+    //支持的格式
+    "imageAllowFiles":[".png",".jpg",".jpeg"],
+    //保存为原文件名
+    "imagePathFormat":"/upload/ueditor/image/{yyyy}{mm}{dd}/{filename}",
+}]));
+
 
 
 //配置子路由 [必须放在全局中间件之后]
