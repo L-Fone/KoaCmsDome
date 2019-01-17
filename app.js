@@ -38,6 +38,7 @@ render(app,{
 //配置静态资源中间件
 app.use(statics(__dirname + '/public'));
 
+
 //配置session
 app.keys = ['some secret hurr'];//默认一定一定要加
 const CONFIG =
