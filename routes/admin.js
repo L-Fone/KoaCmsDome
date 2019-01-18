@@ -85,11 +85,11 @@ router.all('/editor/controller',ueditor(['public',{
 
 //配置子路由 [必须放在全局中间件之后]
 router.use('/user',user);
-router.use('/focus',focus);
 router.use('/login',login);
 router.use('/manager', manager);
 router.use('/articlecate', articlecate);//分类管理
 router.use('/article', article);//内容管理
+router.use('/focus', focus);//轮播图管理
 router.use(index);
 
 

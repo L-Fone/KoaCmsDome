@@ -66,6 +66,7 @@ class DB
         let attr = {};
         let slipNum = 0;
         let pageSize = 0;
+        let sortJson = {};
         if(arguments.length === 2)
         {
         }
@@ -79,6 +80,12 @@ class DB
             let starPage = json3.page || 1;
             pageSize = json3.pageSize || 20;
             slipNum = (starPage-1)*pageSize;
+
+            //排序
+            if(json3.sort)
+            {
+                sortJson = json3.sort;
+            }
         }
         else
         {
@@ -88,7 +95,7 @@ class DB
         return new Promise((resolve, reject)=>{
             this.connect().then((db)=>{
                 //db.collection(collectionName).find(json,(error,result)=>{
-                let result = db.collection(collectionName).find(json1,{files:attr}).skip(slipNum).limit(pageSize);
+                let result = db.collection(collectionName).find(json1,{files:attr}).skip(slipNum).limit(pageSize).sort(sortJson);
 
                 result.toArray((err, doc)=>
                 {

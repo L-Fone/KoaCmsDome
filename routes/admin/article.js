@@ -37,7 +37,12 @@ router.get('/',async (ctx)=>{
     let pageSize = 8;
     let visiblePage = 5;
 
-    let result = await db.find(cfg.article,{},{},{page:curPage,pageSize:pageSize});
+    let result = await db.find(cfg.article,{},{},
+        {
+            page:curPage,
+            pageSize:pageSize,
+            sort:{ "edit_time":-1, }
+        });
 
     //console.log(result);
     let count = await db.count(cfg.article,{});
@@ -45,6 +50,7 @@ router.get('/',async (ctx)=>{
     await ctx.render('admin/article/index',{
         //传输数据到页面显示
         list : result,
+        cfg:cfg.article,
         visiblePage:visiblePage,//显示条数
         curPage:curPage,//当前页
         totalPages:Math.ceil(count/pageSize),//总页数 向上取整
@@ -85,12 +91,13 @@ router.post('/doAdd', upload.single('img_url') , async (ctx)=>{
     let desc = ctx.req.body.desc || '';//文章描述
     let content = ctx.req.body.content || '';//正文内容
     let img = ctx.req.file ? "upload/"+ctx.req.file.filename : '';//文章图片
-    let publish_time = new Date();
+    let add_time = new Date();
+    let edit_time = new Date();
 
     //属性的简写
     let json =
         {
-        pid, catename, title, author, status, isbest, ishot, isnew, keywords, desc, content, img, publish_time
+            pid, catename, title, author, status, isbest, ishot, isnew, keywords, desc, content, img, add_time, edit_time
         };
     //ctx.body=json;
 
@@ -142,14 +149,14 @@ router.post('/doEdit', upload.single('img_url') , async (ctx)=>{
     let desc = ctx.req.body.desc || '';//文章描述
     let content = ctx.req.body.content || '';//正文内容
     let img = ctx.req.file ? "upload/"+ctx.req.file.filename : '';//文章图片
-    let publish_time = new Date();
+    let edit_time = new Date();
 
     if(img)
     {
         var json =
             {
                 //属性的简写
-                pid, catename, title, author, status, isbest, ishot, isnew, keywords, desc, content, img, publish_time
+                pid, catename, title, author, status, isbest, ishot, isnew, keywords, desc, content, img, edit_time
             };
     }
     else
@@ -157,7 +164,7 @@ router.post('/doEdit', upload.single('img_url') , async (ctx)=>{
         var json =
             {
                 //属性的简写
-                pid, catename, title, author, status, isbest, ishot, isnew, keywords, desc, content
+                pid, catename, title, author, status, isbest, ishot, isnew, keywords, desc, content, edit_time
             };
     }
 

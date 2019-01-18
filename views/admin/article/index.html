@@ -70,10 +70,14 @@
 											<i class="icon-time bigger-110 hidden-480"></i>
 											发布时间
 										</th>
+										<th class="center">
+											<i class="icon-time bigger-110 hidden-480"></i>
+											最后编辑时间
+										</th>
 										<th width="60px;" class="center">排序</th>
 										<th width="60px;" class="center">热门</th>
 										<th width="60px;" class="center">推荐</th>
-										<th width="60px;" class="center">状态</th>
+										<th width="60px;" class="center">新品</th>
 										<th width="100px;" class="center">操作</th>
 									</tr>
 								</thead>
@@ -91,33 +95,37 @@
 										</td>
 
 										<td>
-											{{$value.publish_time | dateFormat}}
+											{{$value.add_time | dateFormat}}
 										</td>
 										<td>
-											<input type="text" value="{{$value.sort || 0}}" class="sort_input" onblur="app.changeSort(this,'article','{{@$value._id}}')"/>
+											{{$value.edit_time | dateFormat}}
+										</td>
+										<td>
+											<!-- onblur监听鼠标离开的事件  此处 app.changeSort 为basic.js 里面定义的方法 并且传递过去value属性-->
+											<input type="text" value="{{$value.sort || 0}}" class="sort_input" onblur="app.changeSort(this,'{{@cfg}}','{{@$value._id}}')"/>
 										</td>
 
 										<td>
-											{{if $value.is_host==1}}
-											<img src="{{__ROOT__}}/admin/images/yes.gif" onclick="app.toggle(this,'article','is_host','{{@$value._id}}')" />
+											{{if $value.isbest==1}}
+											<img src="{{__ROOT__}}/admin/images/yes.gif" onclick="app.toggle(this,'{{@cfg}}','isbest','{{@$value._id}}')" />
 											{{else}}
-											<img src="{{__ROOT__}}/admin/images/no.gif" onclick="app.toggle(this,'article','is_host','{{@$value._id}}')" />
+											<img src="{{__ROOT__}}/admin/images/no.gif" onclick="app.toggle(this,'{{@cfg}}','isbest','{{@$value._id}}')" />
 											{{/if}}
 										</td>
 
 										<td>
-											{{if $value.is_best==1}}
-											<img src="{{__ROOT__}}/admin/images/yes.gif" onclick="app.toggle(this,'article','is_best','{{@$value._id}}')" />
+											{{if $value.ishot==1}}
+											<img src="{{__ROOT__}}/admin/images/yes.gif" onclick="app.toggle(this,'{{@cfg}}','ishot','{{@$value._id}}')" />
 											{{else}}
-											<img src="{{__ROOT__}}/admin/images/no.gif" onclick="app.toggle(this,'article','is_best','{{@$value._id}}')" />
+											<img src="{{__ROOT__}}/admin/images/no.gif" onclick="app.toggle(this,'{{@cfg}}','ishot','{{@$value._id}}')" />
 											{{/if}}
 										</td>
 
 										<td>
-											{{if $value.status==1}}
-											<img src="{{__ROOT__}}/admin/images/yes.gif" onclick="app.toggle(this,'article','status','{{@$value._id}}')" />
+											{{if $value.isnew==1}}
+											<img src="{{__ROOT__}}/admin/images/yes.gif" onclick="app.toggle(this,'{{@cfg}}','isnew','{{@$value._id}}')" />
 											{{else}}
-											<img src="{{__ROOT__}}/admin/images/no.gif" onclick="app.toggle(this,'article','status','{{@$value._id}}')" />
+											<img src="{{__ROOT__}}/admin/images/no.gif" onclick="app.toggle(this,'{{@cfg}}','isnew','{{@$value._id}}')" />
 											{{/if}}
 										</td>
 										<td>

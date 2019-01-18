@@ -87,6 +87,33 @@ router.get('/delete',async (ctx)=>{
 });
 
 
+//改变文章排序 Ajax接口
+router.get('/changeSort',async (ctx)=>{
+
+    //更新数据
+    let collectionName = ctx.query.collectionName;
+    let sortValue = ctx.query.value;
+    let id = ctx.query.id;
+
+    //更新的数据
+    let json =
+        {
+            sort : sortValue
+        };
+
+    let result = await db.update(collectionName, {"_id":db.GetObjectID(id)}, json);
+
+    if(result.result.ok == 1)
+    {
+        ctx.body = {'message:':'更新成功','success':true};
+    }
+    else
+    {
+        ctx.body = {'message:':'更新失败,参数错误','success':false};
+    }
+});
+
+
 
 
 //暴露出模块

@@ -16,6 +16,7 @@ var app =
             $.get('/admin/changeStatus', {collectionName:collectionName, attr:attr, id:id},
                 function (data)
                 {
+
                     if(data.success)
                     {
                         if(el.src.indexOf('yes') != -1)
@@ -38,6 +39,20 @@ var app =
                 let flag = confirm('你确定要删除吗？');
                 return flag;
             })
+        },
+
+
+        //改变排序的方法
+        changeSort(el, collectionName, id)
+        {
+            let sortValue = el.value;
+            //触发 Ajax 请求
+            $.get('/admin/changeSort', {collectionName:collectionName, id:id, value:sortValue},
+                function (data)
+                {
+                    //console.log(data);
+                }
+            )
         }
 
     };
