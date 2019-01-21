@@ -1,127 +1,109 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>我的博客</title>
-	<link rel="stylesheet" type="text/css" href="default/css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="default/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="default/css/index.css" />
-	<link rel="stylesheet" type="text/css" href="default/css/swiper.min.css" />
-	<script type="text/javascript" src="default/js/swiper.min.js">
-	</script>
-	
-</head>
-<body>
-{{include 'default/public/header_inner.html'}}
-<div id="banner-wrapper">
-    	
+
+<!--引入通用头部-->
+{{include 'default/public/header.html'}}
+
+<body class="user-select">
+
+<!--引入头部导航-->
+{{include 'default/public/nav_header.html'}}
+
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <div id="focusslide" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#focusslide" data-slide-to="0" class="active"></li>
+                    <li data-target="#focusslide" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <a href="#" target="_blank" title="木庄网络博客源码">
+                            <img src="/default/images/201610181557196870.jpg" alt="木庄网络博客源码" class="img-responsive"></a>
+                    </div>
+                    <div class="item">
+                        <a href="#" target="_blank" title="专业网站建设">
+                            <img src="/default/images/201610241227558789.jpg" alt="专业网站建设" class="img-responsive"></a>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#focusslide" role="button" data-slide="prev" rel="nofollow">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
+                        class="sr-only">上一个</span> </a> <a class="right carousel-control" href="#focusslide"
+                                                           role="button" data-slide="next" rel="nofollow"> <span
+                    class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span
+                    class="sr-only">下一个</span> </a></div>
+
+            <!-- 最新推荐 -->
+            <article class="excerpt-minic excerpt-minic-index">
+                <h2><span class="red">【推荐】</span><a target="_blank" href="#" title="用DTcms做一个独立博客网站（响应式模板）">用DTcms做一个独立博客网站（响应式模板）</a>
+                </h2>
+                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
+                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
+            </article>
 
 
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-
-        <!-- 轮播图 -->
-        {{each focus}}
-            <div class="swiper-slide">
-                <img src="{{$value.img}}" alt="{{$value.title}}" />
+            <!-- 二级分类标签 -->
+            <div class="title">
+                <h3>最新发布</h3>
+                <div class="more">
+                    <a href="#" title="MZ-NetBlog主题">MZ-NetBlog主题</a>
+                    <a href="#" title="IT技术笔记">IT技术笔记</a>
+                    <a href="#" title="源码分享">源码分享</a>
+                    <a href="#" title="靠谱网赚">靠谱网赚</a>
+                    <a href="#" title="资讯分享">资讯分享</a>
+                </div>
             </div>
-        {{/each}}
-     
-    </div>
-     <div class="swiper-pagination"></div>
-     
-     <div class="swiper-button-prev swiper-button-white"></div>
-     <div class="swiper-button-next swiper-button-white"></div>
-     
-  </div>
- 
-    
-</div>
-<div id="main">       
-        <div id="main_center-wrapper">
-               <div class="main_center">              
-                   <h2>我们的优势 Our Advantages </h2>
-                   <h3>独一无二的设计、造国际品质的产品，行无微不至的服务</h3>
-                   <ul>
-	                   <li><h3>我们的设计 Our Design</h3><h4>从实地到方案敲定再到设计出图，每一步都有优秀的设计团队全程跟踪，为您打造出最合适的作品是最诚恳的义务。</h4><img src="default/images/mian2_image1.jpg" /></li>
-	                   <li><h3>我们的设计 Our Design</h3><h4>从实地到方案敲定再到设计出图，每一步都有优秀的设计团队全程跟踪，为您打造出最合适的作品是最诚恳的义务。</h4><img src="default/images/mian2_image2.jpg" /></li>
-	                   <li style=" margin-right:0;"><h3>我们的设计 Our Design</h3><h4>从实地到方案敲定再到设计出图，每一步都有优秀的设计团队全程跟踪，为您打造出最合适的作品是最诚恳的义务。</h4><img src="default/images/mian2_image3.jpg" /></li>
-                   </ul>
-               </div>
-        </div>
-        <div id="main_bottom-wrapper">
-                  <div class="main_bottom">
-                       <h2>原创案例 Successful Case </h2>
-                       <h3>始终以建设温馨、和谐的家园、提升你的居家生活品味为己任。</h3>
-                       <div class="main_bottom-nav clear">
-                       
-                       <a href="#" style=" font-weight:900; background:#f75a53;">服务行业  <img src="default/images/jiao.png" /></a>
-                       <a href="#">教育行业</a>
-                       <a href="#">房产行业</a>
-                       <a href="#">能源行业</a>
-                       </div>
-                       <div class="main_bottom-table">
-                           <ul  class="clear">
-                           
-                           <li><a href="#"><img src="default/images/mian3_image1.jpg" alt="&nbsp;"/></a></li>
-                           <li><a href="#"><img src="default/images/mian3_image2.jpg" alt="&nbsp;" /></a></li>
-                           <li style=" margin-right:0"><a href="#"><img src="default/images/mian3_image3.jpg"  alt="&nbsp;"/></a></li>
-                           <li><a href="#" style=" margin-bottom:0"><img src="default/images/mian3_image4.jpg" alt="&nbsp;" /></a></li>
-                           <li><a href="#" style=" margin-bottom:0"><img src="default/images/mian3_image5.jpg" alt="&nbsp;"/></a></li>
-                           <li style=" margin-right:0; margin-bottom:0"><a href="#"><img src="default/images/mian3_image6.jpg"  alt="&nbsp;"/></a></li>
-                           
-                           
-                           
-                           </ul>
-                           
-                       
-                       
-                       </div>
-                      
-                      
-                  
-                  
-                  </div>
-         
-        
-        
-        </div>
-</div>
 
-
-<div id="footer-wrapper">
-            <div class="footer-inner">
-                <p>
-                    <a href="#">网站首页</a>&nbsp;&nbsp;|&nbsp;
-                    <a href="#">关于我们</a>&nbsp;&nbsp;|&nbsp;
-                    <a href="#">产品展示</a>&nbsp;&nbsp;|&nbsp;
-                    <a href="#">客户案例</a>&nbsp;&nbsp;|&nbsp;
-                    <a href="#">新闻资讯</a>&nbsp;&nbsp;|&nbsp;
-                    <a href="#">帮助中心</a>&nbsp;&nbsp;|&nbsp;
-                    <a href="#">解决方案</a>&nbsp;&nbsp;|&nbsp;
-                    <a href="#">联系我们</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            {{each focus}}
+            <!-- 最新发布 -->
+            <article class="excerpt excerpt-1" style="">
+                <a class="focus" href="#" title="{{$value.title}}" target="_blank"><img class="thumb"
+                                                                                        data-original="/default/images/201610181739277776.jpg"
+                                                                                        src="/default/images/201610181739277776.jpg"
+                                                                                        alt="用DTcms做一个独立博客网站（响应式模板）"
+                                                                                        style="display: inline;"></a>
+                <header><a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
+                    <h2><a href="#" title="{{$value.title}}" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a>
+                    </h2>
+                </header>
+                <p class="meta">
+                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
+                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
+                                                                                                   href="##comment"
+                                                                                                   title="评论"
+                                                                                                   target="_blank"><i
+                        class="glyphicon glyphicon-comment"></i> 4</a>
                 </p>
-                <p>Copyright © 2002-2015上海机械设备服务有限公司 版权所有 Power by DedeCms</p>
-                <p>电话：15918779820 E-mail：89898981@qq.com 地址：上海市沙河广园东路1858新天地服装城</p>
-            </div>
-</div>
-        
-  <script>
-      //这个是配置轮播图的
-    var mySwiper = new Swiper('.swiper-container',{
-    	  autoplay:true,
-          loop:true,//循环轮播
-		  pagination: {
-		    el: '.swiper-pagination',
-		  },
-		   navigation: {
-		    nextEl: '.swiper-button-next',
-		    prevEl: '.swiper-button-prev',
-		  }
-		
-	})
-  </script>
-        
-    
+                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
+                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
+            </article>
+            {{/each}}
+
+
+            <!-- 分页 -->
+            <nav class="pagination" style="display: none;">
+                <ul>
+                    <li class="prev-page"></li>
+                    <li class="active"><span>{{curPage}}</span></li>
+                    <li><a href="?page={{curPage}}">{{curPage}}</a></li>
+                    {{if curPage >100}}
+                    <li class="next-page"><a href="?page={{nextPage}}">下一页</a></li>
+                    {{/if}}
+                    <li><span>共 {{totalPages}} 页</span></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!--div class="tlinks">Collect from <a href="http://www.cssmoban.com/">企业网站模板</a></div-->
+
+    {{include 'default/public/nav_right.html'}}
+
+</section>
+
+
+{{include 'default/public/footer.html'}}
+
+{{include 'default/public/javaScript.html'}}
+
 </body>
 </html>

@@ -40,24 +40,39 @@ router.use(async (ctx, next)=>{
 
 /* ------------------------------------------------ */
 
+router.use(async (ctx, next)=>{
+
+    let navlist = await db.find(cfg.nav,{'status':'1'},{},{
+        //要排序
+        sort:{'sort':1}
+    });
+
+    ctx.state.G = {
+      navlist:navlist
+    };
+
+    await next();
+
+});
+
 router.get('/',async (ctx)=>{
     //ctx.body = "前端首页";
 
     //查找轮播图 只显示状态为1的图片
-    let focuslist = await db.find(cfg.focus,{'status':'1'},{},{
+    let list = await db.find(cfg.nav,{'status':'1'},{},{
         //要排序
         sort:{'sort':1}
     });
 
     await ctx.render('default/index',{
-        focus:focuslist,
+        list:list,
     });
 });
 
-router.get('/news',async (ctx)=>{
+router.get('/show',async (ctx)=>{
     //ctx.body = "前端案例";
 
-    await ctx.render('default/news');
+    await ctx.render('default/show');
 });
 
 router.get('/service',async (ctx)=>{
@@ -93,22 +108,16 @@ router.get('/content/:id',async (ctx)=>{
 
 
 
-router.get('/case',async (ctx)=>{
+router.get('/list/:id',async (ctx)=>{
     //ctx.body = "前端案例";
 
-    await ctx.render('default/case');
+    let id = ctx.params.id;
+    console.log(id);
+
+    await ctx.render('default/list');
 });
 
-router.get('/connect',async (ctx)=>{
-    //ctx.body = "前端案例";
 
-    await ctx.render('default/connect');
-});
-
-router.get('/about',async (ctx)=>{
-    // ctx.body = "前端关于我们";
-    await ctx.render('default/about');
-});
 
 
 
