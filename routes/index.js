@@ -58,14 +58,28 @@ router.use(async (ctx, next)=>{
 router.get('/',async (ctx)=>{
     //ctx.body = "前端首页";
 
+    let curPage = ctx.query.page || 1;
+    let pageSize = 8;
+    let visiblePage = 5;
+
     //查找轮播图 只显示状态为1的图片
-    let list = await db.find(cfg.nav,{'status':'1'},{},{
-        //要排序
-        sort:{'sort':1}
-    });
+    let count = await db.count(cfg.article,{});
+
+    let result = await db.find(cfg.article,{},{},
+        {
+            page:curPage,
+            pageSize:pageSize,
+            sort:{ "catename":1,"edit_time":-1 }
+        });
+
+    let focus = await db.find(cfg.focus,{'status':'1'});
 
     await ctx.render('default/index',{
-        list:list,
+        list:result,
+        focus:focus,
+        visiblePage:visiblePage,//显示条数
+        curPage:curPage,//当前页
+        totalPages:Math.ceil(count/pageSize),//总页数 向上取整
     });
 });
 
@@ -81,6 +95,7 @@ router.get('/service',async (ctx)=>{
     let pathname = url.parse(ctx.request.url).pathname;
 
     let serlist = await db.find(cfg.nav,{"linkurl":pathname});
+
 
     if(serlist.length>0)
     {

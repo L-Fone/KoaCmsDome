@@ -19,6 +19,10 @@ const user = require('./admin/user'),
 
 //文本编辑器
 const ueditor = require('koa2-ueditor');
+//引入自定义模块
+const db = require('../model/db');
+const cfg = require('../model/config');
+const tools = require('../model/tools');
 
 /* -----------------------------------------------------*/
 
@@ -41,10 +45,15 @@ router.use(async (ctx, next)=>{
 
     let splitUrl = pathName.split('/');
 
+    let setting = await db.find(cfg.setting,{});
+
+    let debug = setting[0].debug === "1";
+
     //配置全局对象
     ctx.state.G =
         {
             url:splitUrl,
+            debug:debug,
             userinfo:ctx.session.userinfo,
             prevPage:ctx.request.header['referer'],//记录上一个打开的页面
         };

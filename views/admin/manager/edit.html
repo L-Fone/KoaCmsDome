@@ -53,7 +53,7 @@
 							<label class="col-sm-2 control-label no-padding-right" for="username">创建时间:</label>
 							<div class="col-sm-10">
 								<!--label class="col-xs-10 col-sm-5">{{@list.create_time | dateFormat}}</label-->
-								<input type="text" readonly name="create_time" value="{{if list.create_time && list.create_time !==''}} {{@list.create_time | dateFormat}} {{else}}---{{/if}}" class="col-xs-10 col-sm-5" />
+								<input type="text" readonly name="create_time" value="{{if list.create_time && list.create_time !==''}} {{@list.create_time,'YYYY年MM月DD日 HH:mm:ss' | dateFormat}} {{else}}---{{/if}}" class="col-xs-10 col-sm-5" />
 							</div>
 						</div>
 

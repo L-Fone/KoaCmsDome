@@ -44,20 +44,20 @@
 								<thead>
 									<tr>
 
-										<th class="center">标题</th>
-										<th class="center">分类</th>
+										<th class="center">标题{{if G.debug}} [title]{{/if}}</th>
+										<th class="center">分类{{if G.debug}} [catename]{{/if}}</th>
 										<th class="center">
 											<i class="icon-time bigger-110 hidden-480"></i>
-											发布时间
+											发布时间{{if G.debug}} [add_time]{{/if}}
 										</th>
 										<th class="center">
 											<i class="icon-time bigger-110 hidden-480"></i>
-											最后编辑时间
+											最后编辑时间{{if G.debug}} [edit_time]{{/if}}
 										</th>
-										<th width="60px;" class="center">排序</th>
-										<th width="60px;" class="center">热门</th>
-										<th width="60px;" class="center">推荐</th>
-										<th width="60px;" class="center">新品</th>
+										<th width="60px;" class="center">排序{{if G.debug}} [sort]{{/if}}</th>
+										<th width="60px;" class="center">热门{{if G.debug}} [isbest]{{/if}}</th>
+										<th width="60px;" class="center">推荐{{if G.debug}} [ishot]{{/if}}</th>
+										<th width="60px;" class="center">新品{{if G.debug}} [isnew]{{/if}}</th>
 										<th width="100px;" class="center">操作</th>
 									</tr>
 								</thead>
@@ -75,10 +75,10 @@
 										</td>
 
 										<td>
-											{{$value.add_time | dateFormat}}
+											{{$value.add_time,'YYYY年MM月DD日 HH:mm:ss' | dateFormat}}
 										</td>
 										<td>
-											{{$value.edit_time | dateFormat}}
+											{{$value.edit_time,'YYYY年MM月DD日 HH:mm:ss' | dateFormat}}
 										</td>
 										<td>
 											<!-- onblur监听鼠标离开的事件  此处 app.changeSort 为basic.js 里面定义的方法 并且传递过去value属性-->

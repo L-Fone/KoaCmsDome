@@ -27,7 +27,12 @@
 
 
                     {{each G.navlist}}
-                        <li><a data-cont="{{$value.title}}" title="{{$value.title}}" href="/list{{$value.linkurl}}">{{$value.title}}</a></li>
+                        <li>
+                            <a data-cont="{{$value.title}}" title="{{$value.title}}"
+                             {{if $value.catepid != "0" }}  href="/list{{$value.linkurl}}" {{else}} href="{{$value.linkurl}}" {{/if}} >
+                            {{$value.title}}
+                            </a>
+                        </li>
                     {{/each}}
 
 

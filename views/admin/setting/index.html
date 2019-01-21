@@ -39,7 +39,7 @@
                 <div class="table-responsive">
                     <form action="{{__HOST__}}/admin/setting/doEdit" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="title">网站名称:</label>
+                            <label class="col-sm-2 control-label no-padding-right" for="title">网站名称{{if G.debug}} [title]{{/if}}:</label>
 
                             <div class="col-sm-10">
                                 <input type="text" id="title"  name="title" class="col-xs-10 col-sm-5"  value="{{if list}}{{list.title}}{{/if}}" />
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="qq">QQ:</label>
+                            <label class="col-sm-2 control-label no-padding-right" for="qq">QQ{{if G.debug}} [qq]{{/if}}:</label>
 
                             <div class="col-sm-10">
                                 <input type="text" id="qq"  name="qq" class="col-xs-10 col-sm-5" value="{{if list}}{{list.qq}}{{/if}}"/>
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="email">客服邮箱:</label>
+                            <label class="col-sm-2 control-label no-padding-right" for="email">客服邮箱{{if G.debug}} [email]{{/if}}:</label>
 
                             <div class="col-sm-10">
                                 <input type="text" id="email"  name="email" class="col-xs-10 col-sm-5" value="{{if list}}{{list.email}}{{/if}}"/>
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="phone">联系电话:</label>
+                            <label class="col-sm-2 control-label no-padding-right" for="phone">联系电话{{if G.debug}} [phone]{{/if}}:</label>
 
                             <div class="col-sm-10">
                                 <input type="text" id="phone"  name="phone" class="col-xs-10 col-sm-5" value="{{if list}}{{list.phone}}{{/if}}"/>
@@ -72,7 +72,7 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="ICP">网站备案号:</label>
+                            <label class="col-sm-2 control-label no-padding-right" for="ICP">网站备案号{{if G.debug}} [ICP]{{/if}}:</label>
 
                             <div class="col-sm-10">
                                 <input type="text" id="ICP"  name="ICP" class="col-xs-10 col-sm-5" value="{{if list}}{{list.ICP}}{{/if}}"/>
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="keywords">网站关键字:</label>
+                            <label class="col-sm-2 control-label no-padding-right" for="keywords">网站关键字{{if G.debug}} [keywords]{{/if}}:</label>
 
                             <div class="col-sm-10">
                                 <input type="text" id="keywords"  name="keywords" class="col-xs-10 col-sm-5" value="{{if list}}{{list.keywords}}{{/if}}"/>
@@ -89,7 +89,7 @@
 
 
                         <div class="form-group" style="height: auto">
-                            <label class="col-sm-2 control-label no-padding-right" for="desc">网站描述:</label>
+                            <label class="col-sm-2 control-label no-padding-right" for="desc">网站描述{{if G.debug}} [desc]{{/if}}:</label>
 
                             <div class="col-sm-10">
                                 <textarea type="text" id="desc"  name="desc" class="col-xs-50 col-sm-5" cols="30" rows="5">{{if list}}{{list.desc}}{{/if}}</textarea>
@@ -97,11 +97,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right">关闭网站：</label>
+                            <label class="col-sm-2 control-label no-padding-right">关闭网站{{if G.debug}} [status]{{/if}}：</label>
                             <div class="col-sm-10">
                                 <label for="status1">是：</label><input type="radio" name="status"  id="status1" value="1" {{if list && list.status == 1}} checked {{/if}} />
                                 &emsp;&emsp;
                                 <label for="status2">否：</label><input type="radio" name="status" id="status2" value="0" {{if !list || list.status != 1}} checked {{/if}} />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right">开发者模式{{if G.debug}} [debug]{{/if}}：</label>
+                            <div class="col-sm-10">
+                                <label for="status1">是：</label><input type="radio" name="debug"  id="debug1" value="1" {{if list && list.debug == 1}} checked {{/if}} />
+                                &emsp;&emsp;
+                                <label for="status2">否：</label><input type="radio" name="debug" id="debug2" value="0" {{if !list || list.debug != 1}} checked {{/if}} />
                             </div>
                         </div>
 

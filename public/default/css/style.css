@@ -691,8 +691,18 @@ body, input, button, textarea, select {
     top: -2px;
     margin-right: 6px;
 }
+.divcat {
+    color: #FFF;
+    background-color: rgb(136, 129, 117);
+    padding: 3px 6px;
+    font-size: 12px;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    margin-right: 6px;
+}
 
-.excerpt .cat:hover {
+.excerpt .cat .divcat:hover {
     opacity: .8;
 }
 

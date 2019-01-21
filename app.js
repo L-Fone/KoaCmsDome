@@ -30,8 +30,8 @@ render(app,{
     debug:process.env.NODE_EVN !== 'production', //是否调试模式
 
     //配置 silly-datetime
-    dateFormat:dateFormat = function (value) {    //管道格式化时间
-        return sd.format(value, 'YYYY年MM月DD日 HH:mm:ss');
+    dateFormat:dateFormat = function (value, str) {    //管道格式化时间
+        return sd.format(value, str);
     }
 });
 

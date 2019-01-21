@@ -55,15 +55,15 @@
                             </th>
                             -->
 
-                            <th class="center">轮播图名称</th>
-                            <th class="center">图片</th>
-                            <th class="center">链接地址</th>
+                            <th class="center">轮播图名称{{if G.debug}} [title]{{/if}}</th>
+                            <th class="center">图片{{if G.debug}} [img]{{/if}}</th>
+                            <th class="center">链接地址{{if G.debug}} [linkurl]{{/if}}</th>
                             <th class="center">
                                 <i class="icon-time bigger-110 hidden-480"></i>
-                                上传时间
+                                上传时间{{if G.debug}} [add_time]{{/if}}
                             </th>
-                            <th class="center">排序</th>
-                            <th class="center">状态</th>
+                            <th class="center">排序{{if G.debug}} [sort]{{/if}}</th>
+                            <th class="center">状态{{if G.debug}} [status]{{/if}}</th>
                             <th class="center">操作</th>
 
                         </tr>
@@ -101,7 +101,7 @@
                                 {{if $value.add_time == '' }}
                                 ----
                                 {{else}}
-                                {{@$value.add_time | dateFormat}}
+                                {{@$value.add_time,'YYYY年MM月DD日 HH:mm:ss' | dateFormat}}
                                 {{/if}}
 
                             </td>

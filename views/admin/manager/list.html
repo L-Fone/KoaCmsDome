@@ -95,7 +95,7 @@
 											{{if $value.last_time == '' }}
 												----
 											{{else}}
-												{{@$value.last_time | dateFormat}}
+												{{@$value.last_time,'YYYY年MM月DD日 HH:mm:ss' | dateFormat}}
 											{{/if}}
 
 										</td>
