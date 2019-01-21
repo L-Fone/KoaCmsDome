@@ -34,8 +34,8 @@
     </div><!-- #sidebar-shortcuts -->
 
     <ul class="nav nav-list">
-        <li class="active">
-            <a href="index.html">
+        <li  {{if !G.url[1]}} class="active" {{/if}}>
+            <a href="{{__HOST__}}/admin">
                 <i class="icon-dashboard"></i>
                 <span class="menu-text"> 控制台 </span>
             </a>
@@ -156,28 +156,29 @@
 
         </li>
 
-        <li>
+        <li {{if G.url[1]=="friendlink"}} class="active open" {{/if}}>
             <a href="#" class="dropdown-toggle">
                 <i class="icon-paperclip"></i>
 
                 <span class="menu-text">
 									友情链接管理
-									<span class="badge badge-primary ">5</span>
+                                    <!-- 角标 -->
+									<span class="badge badge-primary "></span>
 								</span>
 
                 <b class="arrow icon-angle-down"></b>
             </a>
 
             <ul class="submenu">
-                <li>
-                    <a href="#">
+                <li {{if G.url[1]=="friendlink"&&!G.url[2]}} class="active" {{/if}}>
+                    <a href="{{__HOST__}}/admin/friendlink">
                         <i class="icon-double-angle-right"></i>
                         友情链接列表
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
+                <li {{if G.url[1]=="friendlink"&&G.url[2]=="add"}} class="active" {{/if}}>
+                    <a href="{{__HOST__}}/admin/friendlink/add">
                         <i class="icon-double-angle-right"></i>
                         增加友情链接
                     </a>
@@ -187,30 +188,31 @@
 
         </li>
 
-        <li>
+        <li {{if G.url[1]=="nav"}} class="active open" {{/if}}>
             <a href="#" class="dropdown-toggle">
                 <i class="icon-list-alt"></i>
 
                 <span class="menu-text">
 									导航管理
-									<span class="badge badge-primary ">5</span>
+									<span class="badge badge-primary "></span>
 								</span>
 
                 <b class="arrow icon-angle-down"></b>
             </a>
 
             <ul class="submenu">
-                <li>
-                    <a href="#">
-                        <i class="icon-double-angle-right"></i>
-                        增加导航
-                    </a>
+                <li {{if G.url[1]=="nav"&&!G.url[2]}} class="active" {{/if}}>
+                <a href="{{__HOST__}}/admin/nav">
+                    <i class="icon-double-angle-right"></i>
+                    导航列表
+                </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-double-angle-right"></i>
-                        导航列表
-                    </a>
+
+                <li {{if G.url[1]=="nav"&&G.url[2]=="add"}} class="active" {{/if}}>
+                <a href="{{__HOST__}}/admin/nav/add">
+                    <i class="icon-double-angle-right"></i>
+                    增加导航
+                </a>
                 </li>
             </ul>
 
@@ -219,8 +221,8 @@
 
 
 
-        <li>
-            <a href="index.html">
+        <li {{if G.url[1]=="setting"}} class="active open" {{/if}}>
+            <a href="{{__HOST__}}/admin/setting">
                 <i class="icon-cog"></i>
                 <span class="menu-text"> 系统设置 </span>
             </a>

@@ -32,13 +32,13 @@ router.get('/changeStatus',async (ctx)=>{
         {
             //es6 属性名表达式
             var json = {
-                [attr]:0
+                [attr]:"0"
             }
         }
         else
         {
             var json = {
-                [attr]:1
+                [attr]:"1"
             }
         }
         let update = await db.update(collectionName, {'_id':db.GetObjectID(id)}, json);

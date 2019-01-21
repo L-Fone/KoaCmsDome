@@ -6,3 +6,12 @@
     width: 40px;
     text-align: center;/* 字体居中 */
 }
+
+.pagination{
+    float: right;
+}
+
+#tbody_item td{
+    text-align: center;
+    vertical-align:middle;
+}

@@ -196,6 +196,10 @@ class DB
         return new ObjectID(id);
     }
 
+    findByID(collectionName, id)
+    {
+        return this.find(collectionName,{"_id": this.GetObjectID(id)});
+    }
 }
 
 //暴露接口

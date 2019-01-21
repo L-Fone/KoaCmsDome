@@ -11,19 +11,19 @@ const db = require('../../model/db');
 const cfg = require('../../model/config');
 const tools = require('../../model/tools');
 
-/* ----------------配置文件上传中间件--------------------------- */
-const storage = multer.diskStorage({
-   destination:function (req, file, cb) {
-       //配置上传文件的目录[上传的目录必须存在]
-       cb(null,'public/upload');
-   } ,
-    filename: function (req,file,cb) {
-        //上传的文件重命名 Date.now()当前时间戳
-       let fileFormat = (file.originalname).split('.');
-        cb(null, Date.now() + '.' + fileFormat[fileFormat.length-1]);
-    }
-});
-const upload = multer({storage:storage});
+/* ----------------配置文件上传中间件 已经配置到tools里面--------------------------- */
+// const storage = multer.diskStorage({
+//    destination:function (req, file, cb) {
+//        //配置上传文件的目录[上传的目录必须存在]
+//        cb(null,'public/upload/article/');
+//    } ,
+//     filename: function (req,file,cb) {
+//         //上传的文件重命名 Date.now()当前时间戳
+//        let fileFormat = (file.originalname).split('.');
+//         cb(null, Date.now() + '.' + fileFormat[fileFormat.length-1]);
+//     }
+// });
+// const upload = multer({storage:storage});
 
 
 
@@ -41,8 +41,14 @@ router.get('/',async (ctx)=>{
         {
             page:curPage,
             pageSize:pageSize,
-            sort:{ "edit_time":-1, }
+            sort:{ "catename":1,"edit_time":-1 }
         });
+
+    //console.log(result);
+    // for (var i = 0; i < result.length ; i++) {
+    //     console.log("result._id ==> " + result[i]._id +" =====> "+ result[i].title +" =====> "+ result[i].catename);
+    // }
+
 
     //console.log(result);
     let count = await db.count(cfg.article,{});
@@ -72,7 +78,7 @@ router.get('/add',async (ctx)=>{
 });
 
 //upload对应中间件 pic对应视图的name
-router.post('/doAdd', upload.single('img_url') , async (ctx)=>{
+router.post('/doAdd', tools.multerSingle(cfg.articleDir, 'img_url') , async (ctx)=>{
     //获取到的所有文章数据
     // ctx.body={
     //     //返回的文件名 判断ctx.req.file是否存在
@@ -90,7 +96,7 @@ router.post('/doAdd', upload.single('img_url') , async (ctx)=>{
     let keywords = ctx.req.body.keywords || '';//搜索关键字
     let desc = ctx.req.body.desc || '';//文章描述
     let content = ctx.req.body.content || '';//正文内容
-    let img = ctx.req.file ? "upload/"+ctx.req.file.filename : '';//文章图片
+    let img = ctx.req.file ? cfg.articleDir + ctx.req.file.filename : '';//文章图片
     let add_time = new Date();
     let edit_time = new Date();
 
@@ -117,11 +123,20 @@ router.get('/edit',async (ctx)=>{
     let catelist = await db.find(cfg.articlecate,{});
 
     //获取当前要编辑的数据
-    let articlelist = await db.find(cfg.article,{"_id":db.GetObjectID(id)});
+    let target = await db.find(cfg.article,{"_id":db.GetObjectID(id)});
+
+    //console.log(articlelist);
+
+    // let calist = tools.cateToList(catelist);
+    // for (var i = 0; i < calist.length ; i++) {
+    //     console.log("articlelist._id ==> " + calist[i]._id +" =====> "+ calist[i].title);
+    // }
+    // console.log("list.pid == > " +articlelist[0].pid +" =====> "+ articlelist[0].title);
+
 
     await ctx.render('admin/article/edit',{
         articlelist:tools.cateToList(catelist),
-        list:articlelist[0],
+        list:target[0],
         prevPage: ctx.state.G.prevPage,//保存上一次打开的页面
     })
 
@@ -129,7 +144,7 @@ router.get('/edit',async (ctx)=>{
 
 
 //保存编辑内容
-router.post('/doEdit', upload.single('img_url') , async (ctx)=>{
+router.post('/doEdit', tools.multerSingle(cfg.articleDir, 'img_url') , async (ctx)=>{
     //获取到的所有文章数据
     // ctx.body={
     //     //返回的文件名 判断ctx.req.file是否存在
@@ -148,7 +163,7 @@ router.post('/doEdit', upload.single('img_url') , async (ctx)=>{
     let keywords = ctx.req.body.keywords || '';//搜索关键字
     let desc = ctx.req.body.desc || '';//文章描述
     let content = ctx.req.body.content || '';//正文内容
-    let img = ctx.req.file ? "upload/"+ctx.req.file.filename : '';//文章图片
+    let img = ctx.req.file ? cfg.articleDir + ctx.req.file.filename : '';//文章图片
     let edit_time = new Date();
 
     if(img)

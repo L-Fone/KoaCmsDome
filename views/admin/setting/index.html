@@ -1,0 +1,155 @@
+{{include 'admin/public/header.html'}}
+
+<body>
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+    </script>
+
+    {{include 'admin/public/nav_top.html'}}
+</div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <!--左侧导航-->
+
+        {{include 'admin/public/nav_left.html'}}
+
+        <div class="main-content">
+            {{include 'admin/public/nav_title_top.html'}}
+
+            <div class="page-content">
+
+                <div class="page-header">
+                    <h1>
+                        系统设置
+                    </h1>
+                </div><!-- /.page-header -->
+
+                <!--表格-->
+
+                <div class="table-responsive">
+                    <form action="{{__HOST__}}/admin/setting/doEdit" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="title">网站名称:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="title"  name="title" class="col-xs-10 col-sm-5"  value="{{if list}}{{list.title}}{{/if}}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="qq">QQ:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="qq"  name="qq" class="col-xs-10 col-sm-5" value="{{if list}}{{list.qq}}{{/if}}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="email">客服邮箱:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="email"  name="email" class="col-xs-10 col-sm-5" value="{{if list}}{{list.email}}{{/if}}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="phone">联系电话:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="phone"  name="phone" class="col-xs-10 col-sm-5" value="{{if list}}{{list.phone}}{{/if}}"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="ICP">网站备案号:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="ICP"  name="ICP" class="col-xs-10 col-sm-5" value="{{if list}}{{list.ICP}}{{/if}}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="keywords">网站关键字:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="keywords"  name="keywords" class="col-xs-10 col-sm-5" value="{{if list}}{{list.keywords}}{{/if}}"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" style="height: auto">
+                            <label class="col-sm-2 control-label no-padding-right" for="desc">网站描述:</label>
+
+                            <div class="col-sm-10">
+                                <textarea type="text" id="desc"  name="desc" class="col-xs-50 col-sm-5" cols="30" rows="5">{{if list}}{{list.desc}}{{/if}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right">关闭网站：</label>
+                            <div class="col-sm-10">
+                                <label for="status1">是：</label><input type="radio" name="status"  id="status1" value="1" {{if list && list.status == 1}} checked {{/if}} />
+                                &emsp;&emsp;
+                                <label for="status2">否：</label><input type="radio" name="status" id="status2" value="0" {{if !list || list.status != 1}} checked {{/if}} />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="logo" >网站Logo:</label>
+
+                            <div class="col-sm-10" style="height: auto">
+                                {{if list&&list.logo != ''}}
+                                    <br/>
+                                        <img src="{{__HOST__}}/{{list.logo}}" style="height: 40px;" />
+                                    <br/>
+                                {{/if}}
+                                <br/>
+                                    <input type="file" id="logo"  name="logo"  value="{{if list}}{{list.logo}}{{/if}}" />
+                                <br/>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label no-padding-right" ></label>
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div><!-- /.main-content -->
+
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+
+
+{{include 'admin/public/footer.html'}}
+
+
+</body>
+</html>
+

@@ -462,7 +462,7 @@ return {
 	},
 
 	/**
-	 * Return the index of an item in an array, or -1 if not found
+	 * Return the default of an item in an array, or -1 if not found
 	 */
 	inArray: function (item, arr) {
 		return arr.indexOf ? arr.indexOf(item) : emptyArray.indexOf.call(arr, item);

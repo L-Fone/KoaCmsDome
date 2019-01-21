@@ -1658,7 +1658,7 @@ seriesTypes.waterfall = extendClass(seriesTypes.column, {
 	getExtremes: noop,
 
 	/**
-	 * Return stack for given index
+	 * Return stack for given default
 	 */
 	getStack: function (i) {
 		var axis = this.yAxis,
@@ -2367,7 +2367,7 @@ wrap(colProto, 'alignDataLabel', function (proceed, point, dataLabel, options, a
 });
 
 /**
- * Extend the mouse tracker to return the tooltip position index in terms of
+ * Extend the mouse tracker to return the tooltip position default in terms of
  * degrees rather than pixels
  */
 wrap(pointerProto, 'getIndex', function (proceed, e) {

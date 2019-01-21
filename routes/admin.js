@@ -12,7 +12,10 @@ const user = require('./admin/user'),
       manager = require('./admin/manager'),
       index = require('./admin/index'),
       articlecate = require('./admin/articlecate'),
-      article = require('./admin/article');
+      article = require('./admin/article'),
+      friendlink = require('./admin/friendlink'),
+      nav = require('./admin/nav');
+      setting = require('./admin/setting');
 
 //文本编辑器
 const ueditor = require('koa2-ueditor');
@@ -90,27 +93,13 @@ router.use('/manager', manager);
 router.use('/articlecate', articlecate);//分类管理
 router.use('/article', article);//内容管理
 router.use('/focus', focus);//轮播图管理
+router.use('/friendlink', friendlink);//友情连接管理
+router.use('/nav', nav);//友情连接管理
+router.use('/setting', setting);//友情连接管理
 router.use(index);
 
 
 /* -----------------------------------------------------*/
-
-router.get('/',async (ctx)=>{
-    //ctx.body = "后台管理首页";
-    await ctx.render('admin/index');
-});
-
-router.get('/user',async (ctx)=>{
-    ctx.body = "用户管理";
-});
-
-router.get('/focus',async (ctx)=>{
-    ctx.body = "轮播图管理";
-});
-
-router.get('/news',async (ctx)=>{
-    ctx.body = "新闻管理";
-});
 
 
 //暴露子路由

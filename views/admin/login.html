@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>后台管理系统登录</title>		
+		<title>个人网络博客登录</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -19,16 +19,22 @@
 		
 		<style type="text/css">
 			.login-layout{
-				background: #428bca;
+				/* 背景 */
+				/*background: #428bca;*/
+				background:url({{__HOST__}}/other/login_bg.gif) no-repeat;
+				background-size:100% 100%;
+				-moz-background-size:100% 100%;
 			}
 			.login-layout .widget-box{
-				background-color:#428bca;
+				/* 边框
+				background-color:#428bca;*/
+				background-color: rgba(247, 247, 247, 0.50);
 			}
 			.login-layout .widget-box .widget-main{
 				padding:26px 16px;
 			}
 			.login-container{
-				padding-top: 80px;
+				padding-top: 200px;
 			}
 			.header{
 				margin-top:0px;
@@ -81,14 +87,14 @@
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
 						<div class="login-container">
-						
+
 							<div class="position-relative">
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
 											
 											<h2 class="header blue lighter bigger center">
-												CMS内容管理系统
+												登录管理
 												
 											</h2>
 

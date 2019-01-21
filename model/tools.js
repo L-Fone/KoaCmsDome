@@ -1,5 +1,7 @@
 
 const md5 = require('md5');
+const multer = require('koa-multer');//文件上传模块
+const fs = require('fs');
 
 let tools =
     {
@@ -57,6 +59,35 @@ let tools =
             }
             return firstArr;
         },
+
+
+        //图片上传的公共方法
+        myMulter(dir)
+        {
+            const storage = multer.diskStorage({
+                destination:function (req, file, cb)
+                {
+                    let targetDir = 'public/' + dir;
+                    if(!fs.existsSync(targetDir)) {
+                        fs.mkdirSync(targetDir);
+                    }
+                    //配置上传文件的目录[上传的目录必须存在]
+                    cb(null,targetDir);
+                } ,
+                filename: function (req,file,cb) {
+                    //上传的文件重命名 Date.now()当前时间戳
+                    let fileFormat = (file.originalname).split('.');
+                    cb(null, Date.now() + '.' + fileFormat[fileFormat.length-1]);
+                }
+            });
+            const upload = multer({storage:storage});
+            return upload;
+        },
+
+        multerSingle(dir,str)
+        {
+            return this.myMulter(dir).single(str);
+        }
 
     };
 
