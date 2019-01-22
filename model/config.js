@@ -12,6 +12,7 @@ var app =
         friendlink:'friendlink',//[友情连接]表单名
         nav:'nav',//[导航标题]表单名
         setting:'setting',//[系统设置]表单名
+        system:'system',//[系统设置]表单名
 
         articleDir:'upload/article/',//[文章内容]文件存放路径
         focusDir:'upload/focus/',//[轮播图]文件存放路径

@@ -83,28 +83,25 @@ router.get('/',async (ctx)=>{
     });
 });
 
-router.get('/show',async (ctx)=>{
+router.get('/show/:id',async (ctx)=>{
     //ctx.body = "前端案例";
 
-    await ctx.render('default/show');
+    let id = ctx.params.id;
+    //console.log(id);
+
+    let result = await db.findByID(cfg.article,id);
+
+    result[0].content = result[0].content.split('\\\\').join('\\');
+
+    await ctx.render('default/show',{
+        list:result[0],
+    });
 });
 
-router.get('/service',async (ctx)=>{
-    //ctx.body = "前端案例";
+router.get('/about',async (ctx)=>{
+    //ctx.body = "还没想好放什么";
 
-    let pathname = url.parse(ctx.request.url).pathname;
-
-    let serlist = await db.find(cfg.nav,{"linkurl":pathname});
-
-
-    if(serlist.length>0)
-    {
-        let list = await db.find(cfg.article,{"pid":serlist[0].catepid});
-
-        await ctx.render('default/service',{
-            list:list
-        });
-    }
+    await ctx.render('default/about');
 });
 
 //内容详情 动态路由
@@ -112,7 +109,11 @@ router.get('/content/:id',async (ctx)=>{
 
     let id = ctx.params.id;
 
+
+
     let result = await db.findByID(cfg.article,id);
+
+
 
     await ctx.render('default/content',{
         list:result[0]
@@ -120,16 +121,41 @@ router.get('/content/:id',async (ctx)=>{
 });
 
 
-
-
-
 router.get('/list/:id',async (ctx)=>{
     //ctx.body = "前端案例";
 
-    let id = ctx.params.id;
-    console.log(id);
+    let curPage = ctx.query.page || 1;
+    let pageSize = 8;
+    let visiblePage = 5;
 
-    await ctx.render('default/list');
+    let linkname = ctx.params.id;
+
+    let result = await db.find(cfg.nav,{"linkurl":"/"+linkname});
+
+    let pid = result[0].catepid;
+
+    let cate = await db.find(cfg.articlecate,{$or:[{"_id":db.GetObjectID(pid)},{"pid":pid}] });
+
+    let arr = tools.GetAllParentObj(cate);
+
+    let count = await db.count(cfg.article, {$or:arr});
+
+    let list = await db.find(cfg.article,{$or:arr},{},
+        {
+            page:curPage,
+            pageSize:pageSize,
+            sort:{ "catename":1,"edit_time":-1 }
+        });
+
+    //console.log(articlelist[0].img);
+
+    await ctx.render('default/list',{
+        nav:result[0],
+        articlelist:list,
+        visiblePage:visiblePage,//显示条数
+        curPage:curPage,//当前页
+        totalPages:Math.ceil(count/pageSize),//总页数 向上取整
+    });
 });
 
 

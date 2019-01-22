@@ -215,7 +215,8 @@
 
     //编辑模式下 设置编辑器内容
     ue.addListener('ready', function () {
-        ue.setContent('{{@list.content}}');//模板字符串
+        let val = '{{@list.content}}';
+        ue.setContent(val);//模板字符串
     });
 
 

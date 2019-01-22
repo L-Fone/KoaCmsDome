@@ -14,8 +14,9 @@ const user = require('./admin/user'),
       articlecate = require('./admin/articlecate'),
       article = require('./admin/article'),
       friendlink = require('./admin/friendlink'),
-      nav = require('./admin/nav');
-      setting = require('./admin/setting');
+      nav = require('./admin/nav'),
+      setting = require('./admin/setting'),
+      system = require('./admin/system');
 
 //文本编辑器
 const ueditor = require('koa2-ueditor');
@@ -45,9 +46,9 @@ router.use(async (ctx, next)=>{
 
     let splitUrl = pathName.split('/');
 
-    let setting = await db.find(cfg.setting,{});
+    let setting = await db.find(cfg.system,{});
 
-    let debug = setting[0].debug === "1";
+    let debug = setting[0] ? setting[0].debug === "1" : false;
 
     //配置全局对象
     ctx.state.G =
@@ -105,11 +106,15 @@ router.use('/focus', focus);//轮播图管理
 router.use('/friendlink', friendlink);//友情连接管理
 router.use('/nav', nav);//友情连接管理
 router.use('/setting', setting);//友情连接管理
+router.use('/system', system);//友情连接管理
 router.use(index);
 
 
 /* -----------------------------------------------------*/
 
+// router.get('/ueditor',async (ctx)=>{
+//     ctx.render('admin/article/ueditor');
+// });
 
 //暴露子路由
 module.exports = router.routes();

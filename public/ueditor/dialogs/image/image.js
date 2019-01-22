@@ -922,24 +922,6 @@
 
                     item.appendChild(img);
                     item.appendChild(icon);
-
-                    /* 添加删除功能 */
-                    item.appendChild($("<span class='delbtn' url='" + list[i].url + "'>✖</span>").click(function () {
-                        var del = $(this);
-                        try {
-                            window.event.cancelBubble = true; //停止冒泡
-                            window.event.returnValue = false; //阻止事件的默认行为
-                            window.event.preventDefault();    //取消事件的默认行为
-                            window.event.stopPropagation();   //阻止事件的传播
-                        } finally {
-                            if (!confirm("确定要删除吗？")) return;
-                            $.post(editor.getOpt("serverUrl") + "?action=deleteimage", { "path": del.attr("url") }, function (data) {
-                                if (data.state == "ok") del.parent().remove();
-                                else alert(data);
-                            });
-                        }
-                    })[0]);
-
                     this.list.insertBefore(item, this.clearFloat);
                 }
             }
@@ -1081,7 +1063,7 @@
                 key = $G('searchTxt').value,
                 type = $G('searchType').value,
                 keepOriginName = editor.options.keepOriginName ? "1" : "0",
-                url = "http://image.baidu.com/i?ct=201326592&cl=2&lm=-1&st=-1&tn=baiduimagejson&istype=2&rn=32&fm=default&pv=&word=" + _this.encodeToGb2312(key) + type + "&keeporiginname=" + keepOriginName + "&" + +new Date;
+                url = "http://image.baidu.com/i?ct=201326592&cl=2&lm=-1&st=-1&tn=baiduimagejson&istype=2&rn=32&fm=index&pv=&word=" + _this.encodeToGb2312(key) + type + "&keeporiginname=" + keepOriginName + "&" + +new Date;
 
             $G('searchListUl').innerHTML = lang.searchLoading;
             ajax.request(url, {

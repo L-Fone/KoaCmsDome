@@ -60,7 +60,6 @@ router.get('/',async (ctx)=>{
         visiblePage:visiblePage,//显示条数
         curPage:curPage,//当前页
         totalPages:Math.ceil(count/pageSize),//总页数 向上取整
-
     });
 });
 
@@ -99,6 +98,8 @@ router.post('/doAdd', tools.multerSingle(cfg.articleDir, 'img_url') , async (ctx
     let img = ctx.req.file ? cfg.articleDir + ctx.req.file.filename : '';//文章图片
     let add_time = new Date();
     let edit_time = new Date();
+
+    console.log(a);
 
     //属性的简写
     let json =
@@ -162,8 +163,10 @@ router.post('/doEdit', tools.multerSingle(cfg.articleDir, 'img_url') , async (ct
     let isnew = ctx.req.body.isnew;//是否新品
     let keywords = ctx.req.body.keywords || '';//搜索关键字
     let desc = ctx.req.body.desc || '';//文章描述
-    let content = ctx.req.body.content || '';//正文内容
+    let content = ctx.req.body.content ? ctx.req.body.content.split('\\').join('\\\\') : '';//正文内容
     let img = ctx.req.file ? cfg.articleDir + ctx.req.file.filename : '';//文章图片
+
+    console.log(content);
     let edit_time = new Date();
 
     if(img)

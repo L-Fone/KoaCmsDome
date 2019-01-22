@@ -161,11 +161,13 @@ body, input, button, textarea, select {
 }
 
 .user-select {
+    /*
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -khtml-user-select: none;
-    user-select: none;
+
+    user-select: none; 文件不能选中*/
 }
 
 ::selection {
@@ -205,6 +207,12 @@ body, input, button, textarea, select {
     position: relative;
     margin: 0 auto;
     max-width: 1200px;
+    padding: 0;
+}
+.container_show{
+    position: relative;
+    margin: 0 auto;
+    max-width: 60%;
     padding: 0;
 }
 
@@ -499,6 +507,14 @@ body, input, button, textarea, select {
     min-height: 500px;
     margin-right: 380px;
     margin-bottom: 15px;
+}
+
+.content_show {
+    position: relative;
+    /*min-height: 500px;
+    margin-right: 380px;
+    margin-bottom: 15px;*/
+    align-content: center;
 }
 
 @media (max-width: 1000px) {
@@ -862,6 +878,13 @@ body, input, button, textarea, select {
     text-align: center;
 }
 
+.article-header_show {
+    margin-bottom: 20px;
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(224, 128, 123, 0.63);
+    text-align: center;
+}
+
 .article-title {
     margin-top: 0;
     font-size: 26px;
@@ -926,8 +949,16 @@ body, input, button, textarea, select {
     cursor: default;
 }
 
+.article-content_show {
+    font-size: 15px;
+    line-height: 25px;
+    background: rgba(210, 236, 234, 0.6);
+    word-wrap: break-word;
+    cursor: default;
+}
+
 .article-content img {
-    margin: 5px auto;
+    margin: 10px auto;
     display: block;
     max-width: 100%;
     height: auto;
@@ -2547,4 +2578,9 @@ body, input, button, textarea, select {
     line-height: 0;
     font-size: 0;
     overflow: hidden;
+}
+
+/* 页签栏位置 */
+.pagination{
+    float: right;
 }

@@ -8,45 +8,50 @@
 <!--引入头部导航-->
 {{include 'default/public/nav_header.html'}}
 
-<section class="container">
+<section class="container_show">
     <div class="content-wrap">
-        <div class="content">
-            <header class="article-header">
-                <h1 class="article-title"><a href="#" title="用DTcms做一个独立博客网站（响应式模板）">用DTcms做一个独立博客网站（响应式模板）</a></h1>
-                <div class="article-meta"> <span class="item article-meta-time">
-	  <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间：2016-10-14"><i
-              class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title=""
-                    data-original-title="来源：木庄网络博客"><i class="glyphicon glyphicon-globe"></i> 木庄网络博客</span> <span
-                        class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
-                        data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a href="#"
-                                                                                                       title="MZ-NetBlog主题">MZ-NetBlog主题</a></span>
-                    <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
-                          data-original-title="浏览量：219"><i class="glyphicon glyphicon-eye-open"></i> 219</span> <span
-                            class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""
-                            data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i> 4</span></div>
+        <div class="content_show">
+
+
+            <header class="article-header_show">
+                <h1 class="article-title">
+                    {{list.title}}
+                </h1>
+                <div class="article-meta">
+                    <span class="item article-meta-time">
+	                    <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间：2016-10-14">
+                            <i class="glyphicon glyphicon-time"></i>
+                            {{list.add_time,'YYYY/MM/DD hh:mm' | dateFormat}}
+                        </time>
+                    </span>
+
+                    <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="来源：L-Fone 博客">
+                        <i class="glyphicon glyphicon-globe"></i> {{list.author}}
+                    </span>
+
+                    <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{list.catename}}">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <a href="#" title="{{list.catename}}">{{list.catename}}</a>
+                    </span>
+
+                    <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="浏览量：219">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                        219
+                    </span>
+
+                    <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="评论量">
+                        <i class="glyphicon glyphicon-comment"></i>
+                        4
+                    </span>
+                </div>
             </header>
-            <article class="article-content">
-                <p><img data-original="images/201610181557196870.jpg" src="images/201610181557196870.jpg" alt=""/></p>
-                <p>
-                    文章效果示例，文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字。</p>
-                <pre class="prettyprint lang-cs">代码示例：
-	public static double JieCheng(int number)
-	{
-		if (number == 0)
-		{
-			return 0;
-		}
 
-		//初始值必须设置为1
-		double result = 1; 
+            <article class="article-content_show">
 
-		for (int i = number; i &gt;= 1; i--)
-		{
-			result = result*i;
-		}
-		return result;
-	}</pre>
+                {{@list.content}}
+
+                <!-- 分享 -->
+                <!--
                 <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#"
                                                                                                   class="bds_qzone"
                                                                                                   data-cmd="qzone"
@@ -71,11 +76,16 @@
                     }, "share": {}
                 };
                 with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=0.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                -->
+
             </article>
-            <div class="article-tags">标签：<a href="#list/2/" rel="tag">DTcms博客</a><a href="#list/3/" rel="tag">木庄网络博客</a><a
-                    href="#list/4/" rel="tag">独立博客</a><a href="#list/5/" rel="tag">修复优化</a>
-            </div>
-            <div class="relates">
+
+            <br/>
+            <br/>
+            <br/>
+
+
+            <!--div class="relates">
                 <div class="title">
                     <h3>相关推荐</h3>
                 </div>
@@ -89,7 +99,9 @@
                     <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
                     <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
                 </ul>
-            </div>
+            </div-->
+
+
             <div class="title" id="comment">
                 <h3>评论</h3>
             </div>
@@ -133,7 +145,7 @@
         </div>
     </div>
 
-    {{include 'default/public/nav_right.html'}}
+
 
 </section>
 

@@ -31,7 +31,6 @@ router.post('/doEdit', tools.multerSingle(cfg.logoDir,'logo'), async (ctx)=>{
     let keywords = ctx.req.body.keywords;
     let desc = ctx.req.body.desc;
     let status = ctx.req.body.status;
-    let debug = ctx.req.body.debug;
     let logo = ctx.req.file ? cfg.logoDir + ctx.req.file.filename : '';//文章图片
     let add_time = new Date();
 
@@ -43,7 +42,7 @@ router.post('/doEdit', tools.multerSingle(cfg.logoDir,'logo'), async (ctx)=>{
     {
         json =
         {
-            title, qq, email, phone, ICP, keywords, desc, status, debug, logo, add_time
+            title, qq, email, phone, ICP, keywords, desc, status,  logo, add_time
         };
         await db.insert(cfg.setting,json);
     }
@@ -51,7 +50,7 @@ router.post('/doEdit', tools.multerSingle(cfg.logoDir,'logo'), async (ctx)=>{
     {
         json =
         {
-            title, qq, email, phone, ICP, keywords, desc, status, debug, logo
+            title, qq, email, phone, ICP, keywords, desc, status,  logo
         };
         await db.update(cfg.setting,{"_id":result[0]._id},json);
     }
